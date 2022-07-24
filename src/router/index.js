@@ -3,6 +3,10 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import NotFound from '../views/NotFound.vue'
 import Login from '../views/Login.vue'
+import HelloWorld from '../components/HelloWorld.vue'
+import HomeInfo from '../views/home-component/HomeInfo.vue'
+import FutureFuc from '../views/home-component/FutureFuc.vue'
+import CandyLib from '../views/home-component/CandyLib.vue'
 
 // 注册了router对象
 Vue.use(VueRouter)
@@ -10,13 +14,31 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'main',
+    component: HelloWorld
+  },
+  {
+    path: '/login',
     name: 'login',
     component: Login
   },
   {
-    path:'/home',
+    path: '/home',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    children: [
+      { path: '/', redirect: '/home/info' },
+      {
+        // 孩子不用加info
+        path: 'info',
+        component: HomeInfo
+      },
+      {
+        path: 'candy',
+        component: CandyLib
+      },
+      { path: 'future', component: FutureFuc }
+    ]
   },
   {
     path: '*',
@@ -38,5 +60,31 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/' || to.path === '/login') {
+    next();
+    // 这个地方，拿上token，取后端判断
+  } else if (sessionStorage.getItem('token')) {
+    next()
+  } else { // 用户有没有登录
+    next('/login')
+  }
+})
+
+
+
+
+// router.beforeEach((to, from, next) => {
+//   const token = sessionStorage.getItem('token')
+//   console.log(to.path)
+//   // if (to.name !== 'login' && true) {
+//   if (to.path !== '/login' && !token) {
+//     console.log(Vue)
+//     next('/login')
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

@@ -68,6 +68,9 @@ export default {
   methods: {
     login() {
       // TODO: 用户信息验证
+      const token = 'QAZ@WSXEDCV%TGuikfijedhngiks'
+      // 放入sessionStorage
+      sessionStorage.setItem('token', token)
       this.$notify({
         title: "成功",
         message: "您已成功登录，已成功为您跳转至控制台",
@@ -75,6 +78,7 @@ export default {
       });
       // TODO: 跳转路由 一定要记住$router
       this.$router.push("/home");
+      // sessionStorage.setItem('token', '1234')
     },
   },
 };
@@ -167,5 +171,7 @@ body,
 .el-button {
   margin-top: 10px !important;
 }
-
 </style>
+
+
+
