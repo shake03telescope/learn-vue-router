@@ -23,15 +23,18 @@
       <div class="form-layout">
         <div class="form-msg">Username or email address</div>
         <div>
-          <el-input size="small" v-model="username"/>
+          <el-input size="small" v-model="username" />
         </div>
         <div class="pass-msg">
           <span>Password</span>
           <a href="https://github.com/password_reset">Forgot password?</a>
         </div>
-        <div>
-          <el-input size="small" show-password v-model="password"/>
-        </div>
+        <el-input
+          size="small"
+          show-password
+          v-model="password"
+          class="self-input"
+        />
         <div>
           <el-button @click="login" size="small">Sign in</el-button>
         </div>
@@ -76,7 +79,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style scoped>
 * {
   padding: 0;
   margin: 0;
@@ -160,4 +163,9 @@ body,
   font-size: 24px;
   letter-spacing: -0.5px;
 }
+
+.el-button {
+  margin-top: 10px !important;
+}
+
 </style>
