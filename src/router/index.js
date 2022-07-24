@@ -6,12 +6,12 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
     name: 'home',
     component: HomeView
   },
   {
-    path: '/about',
+    path: '/info',
     name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -21,7 +21,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash', // 路由先改为hash模式
   base: process.env.BASE_URL,
   routes
 })
