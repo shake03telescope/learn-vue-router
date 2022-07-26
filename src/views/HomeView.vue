@@ -83,7 +83,7 @@
             p-id="1070"
           ></path>
         </svg>
-        <h3 class="title-3-color">糖果超咸</h3>
+        <h3 class="title-3-color">糖果超咸{{$route.params.username}}</h3>
       </div>
       <div class="center"></div>
       <div class="right" @click="logout">

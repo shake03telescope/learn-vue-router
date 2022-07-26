@@ -7,6 +7,8 @@ import HelloWorld from '../components/HelloWorld.vue'
 import HomeInfo from '../views/home-component/HomeInfo.vue'
 import FutureFuc from '../views/home-component/FutureFuc.vue'
 import CandyLib from '../views/home-component/CandyLib.vue'
+// 动态引入组件
+const Test = () => import('../components/HelloWorld.vue')
 
 // 注册了router对象
 Vue.use(VueRouter)
@@ -15,19 +17,20 @@ const routes = [
   {
     path: '/',
     name: 'main',
+    // component: HelloWorld
     component: HelloWorld
   },
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Test
   },
   {
-    path: '/home',
+    path: '/home/:username',
     name: 'home',
     component: HomeView,
     children: [
-      { path: '/', redirect: '/home/info' },
+      { path: '/', redirect: '/home/:username/info' },
       {
         // 孩子不用加info
         path: 'info',
@@ -61,16 +64,16 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.path === '/' || to.path === '/login') {
-    next();
-    // 这个地方，拿上token，取后端判断
-  } else if (sessionStorage.getItem('token')) {
-    next()
-  } else { // 用户有没有登录
-    next('/login')
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.name === 'home' || to.path === '/login') {
+//     next();
+//     // 这个地方，拿上token，取后端判断
+//   } else if (sessionStorage.getItem('token')) {
+//     next()
+//   } else { // 用户有没有登录
+//     next('/login')
+//   }
+// })
 
 
 
