@@ -8,7 +8,7 @@ import HomeInfo from '../views/home-component/HomeInfo.vue'
 import FutureFuc from '../views/home-component/FutureFuc.vue'
 import CandyLib from '../views/home-component/CandyLib.vue'
 // 动态引入组件
-const Test = () => import('../components/HelloWorld.vue')
+const HomeViewLazy = () => import('../views/HomeView.vue')
 
 // 注册了router对象
 Vue.use(VueRouter)
@@ -23,12 +23,12 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Test
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/home/:username',
     name: 'home',
-    component: HomeView,
+    component: HomeViewLazy,
     children: [
       { path: '/', redirect: '/home/:username/info' },
       {

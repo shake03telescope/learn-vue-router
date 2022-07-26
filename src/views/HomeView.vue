@@ -205,3 +205,11 @@ export default {
   display: flex;
 }
 </style>
+
+
+<parent>
+  <child :method="getMap"></child>
+</parent>
+
+
+<grandSon :method="getMap"></grandSon>
